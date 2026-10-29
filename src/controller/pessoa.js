@@ -2,9 +2,9 @@ import ServicePessoa from '../service/pessoa.js'
 
 class ControllerPessoa {
 
-    Buscar(req, res) {
+    async Buscar(req, res) {
         try {
-            const nomes = ServicePessoa.Buscar()
+            const nomes = await ServicePessoa.Buscar()
 
             res.send({ nomes })
         } catch (e) {
@@ -47,9 +47,10 @@ class ControllerPessoa {
         }
     }
     
-    Deletar(req, res) {
+    async Deletar(req, res) {
         try {
             const id = req.params.id
+            await ServicePessoa.Deletar(id)
             ServicePessoa.Deletar(id)
             
             res.send({ message: "Deletado com sucesso!" })
